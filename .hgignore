@@ -1,0 +1,5 @@
+# for dotfiles only... see the ignore entry in ~/.hgrc
+
+syntax: glob
+
+*
