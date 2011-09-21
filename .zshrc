@@ -68,6 +68,13 @@ export MUTT_EDITOR='vim'
 
 autoload colors; colors # ANSI color codes
 
+# history
+setopt HIST_REDUCE_BLANKS
+setopt HIST_IGNORE_DUPS
+export HISTSIZE=10000
+export SAVEHIST=10000
+export HISTFILE=$HOME/.zsh/history
+
 # prompt
 _virtualenv_prompt () {
   if [[ -n $VIRTUAL_ENV ]]; then
