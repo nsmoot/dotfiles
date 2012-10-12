@@ -51,6 +51,9 @@ alias l='ll'
 alias ll='ls -lh'
 alias la='ls -A'
 alias vi='vim'
+if [ -x /usr/local/bin/mvim ]; then
+  alias vim='mvim -v'
+fi
 alias s='screen'
 alias tree='tree -C --dirsfirst'
 alias rmpyc='find . -name "*.pyc" -delete'
@@ -74,17 +77,44 @@ setopt HIST_IGNORE_DUPS
 export HISTSIZE=10000
 export SAVEHIST=10000
 export HISTFILE=$HOME/.zsh/history
+bindkey "^[[A" history-search-backward
+bindkey "^[[B" history-search-forward
 
 # prompt
 _virtualenv_prompt () {
   if [[ -n $VIRTUAL_ENV ]]; then
-    echo "$reset_color workon$fg[cyan]" `basename "$VIRTUAL_ENV"`
+    echo "$reset_color workon$fg[green]" `basename "$VIRTUAL_ENV"`
   fi
 }
 export PROMPT='
-%(?..[%{$fg[red]%}%?%{$reset_color%}] )%{$fg[magenta]%}%n%{$reset_color%} at %{$fg[yellow]%}%m%{$reset_color%} in %{$fg[green]%}%~$(_virtualenv_prompt)
-%{$fg[magenta]%}>>%{$fg[yellow]%}>%{$reset_color%} '
+%(?..[%{$fg[red]%}%?%{$reset_color%}] )%{$fg[magenta]%}%m%{$reset_color%}: %{$fg[cyan]%}%~$(_virtualenv_prompt)
+%{$fg[yellow]%}$%{$reset_color%} '
 setopt PROMPT_SUBST # perform substitution/expansion in prompts
+
+# functions
+abspath () {
+  # abspath <directory>
+  # Print the absolute path to a given file (using Python's `os.path.abspath()`).
+  python -c 'import os, sys; print os.path.abspath(sys.argv[1])' "$@"
+}
+
+python_lib () {
+  # python_lib
+  # Print the full path to the current Python site-packages directory.
+  echo `python -c 'import distutils.sysconfig; print distutils.sysconfig.get_python_lib()'`
+}
+
+pylink () {
+  # pylink <package/module>
+  # Symlink a Python package/module into the site-packages directory.
+  ln -s $(abspath `pwd`/"$1") `python_lib`/`basename "$1"`
+}
+
+pyunlink () {
+  # pyunlink <package/module>
+  # Remove the link to a Python package/module from the site-packages directory.
+  unlink `python_lib`/`basename "$1"`
+}
 
 # ruby
 RBENV_DIR="$HOME/.rbenv"
