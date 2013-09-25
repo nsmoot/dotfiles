@@ -77,8 +77,12 @@ setopt HIST_IGNORE_DUPS
 export HISTSIZE=10000
 export SAVEHIST=10000
 export HISTFILE=$HOME/.zsh/history
-bindkey "^[[A" history-search-backward
-bindkey "^[[B" history-search-forward
+autoload -U up-line-or-beginning-search
+autoload -U down-line-or-beginning-search
+zle -N up-line-or-beginning-search
+zle -N down-line-or-beginning-search
+bindkey "^[[A" up-line-or-beginning-search
+bindkey "^[[B" down-line-or-beginning-search
 
 # prompt
 _virtualenv_prompt () {
