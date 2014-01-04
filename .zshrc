@@ -85,6 +85,7 @@ bindkey "^[[A" up-line-or-beginning-search
 bindkey "^[[B" down-line-or-beginning-search
 
 # prompt
+export VIRTUAL_ENV_DISABLE_PROMPT=y
 _virtualenv_prompt () {
   if [[ -n $VIRTUAL_ENV ]]; then
     echo "$reset_color workon$fg[green]" `basename "$VIRTUAL_ENV"`
@@ -94,6 +95,31 @@ export PROMPT='
 %(?..[%{$fg[red]%}%?%{$reset_color%}] )%{$fg[magenta]%}%m%{$reset_color%}: %{$fg[cyan]%}%~$(_virtualenv_prompt)
 %{$fg[yellow]%}$%{$reset_color%} '
 setopt PROMPT_SUBST # perform substitution/expansion in prompts
+
+# python
+if [ -f ~/.pythonrc ]; then
+  export PYTHONSTARTUP=~/.pythonrc
+fi
+
+# virtualenv
+if which virtualenvwrapper.sh >/dev/null 2>&1; then
+  export WORKON_HOME=$HOME/.virtualenvs
+  . "`which virtualenvwrapper.sh`"
+  if [ -z "$VIRTUAL_ENV" ]; then
+    workon default
+  fi
+fi
+
+# pip
+if which pip >/dev/null 2>&1; then
+  if [ ! -f ~/.zsh/cache/pip_completion ]; then
+    pip completion --zsh | egrep -v '^\s*(#|$)' > ~/.zsh/cache/pip_completion 2>/dev/null
+  fi
+
+  . ~/.zsh/cache/pip_completion
+
+  export PIP_RESPECT_VIRTUALENV=true
+fi
 
 # functions
 abspath () {
