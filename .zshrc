@@ -179,6 +179,12 @@ if [ -d "$RBENV_DIR" ]; then
   fi
 fi
 
+# npm
+NPM_PACKAGES_DIR="$HOME/.npm-packages"
+if [ -d "$NPM_PACKAGES_DIR" ]; then
+  export PATH="$PATH:$NPM_PACKAGES_DIR/bin"
+fi
+
 # user-dependent settings
 if [[ "`id -u`" -eq 0 ]]; then
   umask 022
