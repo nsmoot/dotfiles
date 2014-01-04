@@ -16,7 +16,7 @@ set showmatch
 set showmode
 set t_Co=256
 syntax on
-colorscheme vividchalk
+colorscheme Tomorrow-Night
 set number
 if exists('+colorcolumn')
   set colorcolumn=80
