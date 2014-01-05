@@ -3,6 +3,7 @@ mkdir -p ~/.zsh/cache
 
 # path
 PATH="/usr/local/sbin:/usr/local/bin:$PATH"
+PATH="$PATH:/sbin"
 PATH="$PATH:$HOME/bin"
 export PATH
 
