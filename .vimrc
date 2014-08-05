@@ -16,7 +16,7 @@ set showmatch
 set showmode
 set t_Co=256
 syntax on
-colorscheme Tomorrow-Night
+colorscheme Tomorrow-Night-Blue
 set number
 if exists('+colorcolumn')
   set colorcolumn=80
@@ -38,6 +38,11 @@ set autoindent " copy previous line's indentation
 
 "" abbreviations
 map q :q<CR>
+
+"" recoveries
+silent !mkdir -p ~/.vim/{backup,swp}/
+set backupdir=~/.vim/backup/
+set directory=~/.vim/swp/
 
 filetype plugin indent on
 
