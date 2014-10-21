@@ -133,7 +133,11 @@ if which virtualenvwrapper.sh >/dev/null 2>&1; then
   export WORKON_HOME=$HOME/.virtualenvs
   . "`which virtualenvwrapper.sh`"
   if [ -z "$VIRTUAL_ENV" ]; then
-    workon default
+    if [ -d $WORKON_HOME/default ]; then
+      workon default
+    else
+      mkvirtualenv default
+    fi
   fi
 fi
 
