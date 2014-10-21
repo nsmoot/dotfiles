@@ -4,6 +4,7 @@ mkdir -p ~/.zsh/cache
 # path
 PATH="/usr/local/sbin:/usr/local/bin:$PATH"
 PATH="$PATH:/sbin"
+PATH="$PATH:/opt/bin"
 PATH="$PATH:$HOME/bin"
 export PATH
 
@@ -64,6 +65,7 @@ alias dos2unix='recode ibmpc..lat1'
 alias t='vim -c ":$" ~/.todo'
 alias todo='cat ~/.todo'
 alias p='ping www.make.sh'
+alias gs='git status --short'
 
 # viewing / editing
 export PAGER='less'
