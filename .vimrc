@@ -16,7 +16,8 @@ set showmatch
 set showmode
 set t_Co=256
 syntax on
-colorscheme Tomorrow-Night-Blue
+set background=dark
+colorscheme n
 set number
 if exists('+colorcolumn')
   set colorcolumn=80
@@ -51,10 +52,11 @@ au FileType yaml set ts=2 sw=2 et
 au FileType javascript,python set ts=4 sw=4 tw=79 et sts=4 autoindent
 au FileType html,perl,c,cpp set tw=79 autoindent
 au FileType mail set tw=68 et spell spelllang=en_us
+au FileType gitcommit set tw=72 et spell spelllang=en_us
 au BufRead,BufNewFile /usr/local/etc/nginx/* set ft=nginx
 
-"" autocmd BufWritePost *.py call Pyflakes()
-"" autocmd BufWritePost *.py call Pep8()
+"" au BufWritePost *.py call Pyflakes()
+"" au BufWritePost *.py call Pep8()
 
 "" remove all trailing whitespace
-autocmd FileType html,py,scss autocmd BufWritePre <buffer> :%s/\s\+$//e
+au FileType html,py,scss autocmd BufWritePre <buffer> :%s/\s\+$//e
