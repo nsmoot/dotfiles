@@ -4,7 +4,7 @@
 
 cd ~
 
-for f in `ls -A .dotfiles/ | grep -v 'init.sh'`; do
+for f in `ls -A .dotfiles/ | grep -vE 'init\.sh|\.git/?$|\.gitmodules'`; do
   ln -s .dotfiles/$f
 done
 
