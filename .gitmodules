@@ -25,3 +25,6 @@
 [submodule ".vim/bundle/vim-surround"]
 	path = .vim/pack/plugins/start/vim-surround
 	url = https://github.com/tpope/vim-surround.git
+[submodule ".vim/pack/plugins/start/vim-elixir"]
+	path = .vim/pack/plugins/start/vim-elixir
+	url = https://github.com/elixir-lang/vim-elixir.git
