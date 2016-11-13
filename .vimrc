@@ -1,9 +1,6 @@
 "" this must be first
 set nocompatible
 
-"" plugins
-call pathogen#infect()
-
 "" file management
 set hidden
 set wildmode=list:longest
